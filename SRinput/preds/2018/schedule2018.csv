@@ -762,71 +762,74 @@
 2018,13,"Nov 17, 2018",7:30 PM,Sat,Western Kentucky,40,,Texas-El Paso,16,"Houchens Industries-L.T. Smith Stadium - Bowling Green, Kentucky"
 2018,13,"Nov 17, 2018",3:30 PM,Sat,Wisconsin,47,@,Purdue,44,"Ross-Ade Stadium - West Lafayette, Indiana"
 2018,13,"Nov 17, 2018",4:00 PM,Sat,Wyoming,35,,Air Force,27,"Jonah Field War Memorial Stadium - Laramie, Wyoming"
-2018,14,"Nov 20, 2018",7:00 PM,Tue,Ball State,,@,Miami (OH),,
-2018,14,"Nov 20, 2018",7:00 PM,Tue,Northern Illinois,,@,Western Michigan,,
-2018,14,"Nov 22, 2018",3:30 PM,Thu,Colorado State,,@,Air Force,,
-2018,14,"Nov 22, 2018",7:30 PM,Thu,(22) Mississippi State,,@,Mississippi,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Akron,,@,Ohio,,
-2018,14,"Nov 23, 2018",2:30 PM,Fri,Arkansas,,@,Missouri,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Buffalo,,@,Bowling Green State,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,(8) Central Florida,,@,South Florida,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Central Michigan,,@,Toledo,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,East Carolina,,@,Cincinnati,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Eastern Michigan,,@,Kent State,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Houston,,@,Memphis,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Nebraska,,@,Iowa,,
-2018,14,"Nov 23, 2018",8:00 PM,Fri,(6) Oklahoma,,@,(12) West Virginia,,
-2018,14,"Nov 23, 2018",4:00 PM,Fri,Oregon,,@,Oregon State,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,(11) Texas,,@,Kansas,,
-2018,14,"Nov 23, 2018",12:00 PM,Fri,Virginia,,@,Virginia Tech,,
-2018,14,"Nov 23, 2018",8:30 PM,Fri,(16) Washington,,@,(7) Washington State,,
+2018,14,"Nov 20, 2018",7:00 PM,Tue,Miami (OH),42,,Ball State,21,"Fred Yager Stadium - Oxford, Ohio"
+2018,14,"Nov 20, 2018",7:00 PM,Tue,Western Michigan,28,,Northern Illinois,21,"Waldo Stadium - Kalamazoo, Michigan"
+2018,14,"Nov 22, 2018",3:30 PM,Thu,Air Force,27,,Colorado State,19,"Falcon Stadium - Colorado Springs, Colorado"
+2018,14,"Nov 22, 2018",7:30 PM,Thu,(22) Mississippi State,35,@,Mississippi,3,"Vaught-Hemingway Stadium - Oxford, Mississippi"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Buffalo,44,@,Bowling Green State,14,"Doyt Perry Stadium - Bowling Green, Ohio"
+2018,14,"Nov 23, 2018",4:15 PM,Fri,(8) Central Florida,38,@,South Florida,10,"Raymond James Stadium - Tampa, Florida"
+2018,14,"Nov 23, 2018",3:30 PM,Fri,Cincinnati,56,,East Carolina,6,"Nippert Stadium - Cincinnati, Ohio"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Eastern Michigan,28,@,Kent State,20,"Dix Stadium - Kent, Ohio"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Iowa,31,,Nebraska,28,"Kinnick Stadium - Iowa City, Iowa"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Memphis,52,,Houston,31,"Liberty Bowl Memorial Stadium - Memphis, Tennessee"
+2018,14,"Nov 23, 2018",2:30 PM,Fri,Missouri,38,,Arkansas,0,"Memorial Stadium/Faurot Field - Columbia, Missouri"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Ohio,49,,Akron,28,"Peden Stadium - Athens, Ohio"
+2018,14,"Nov 23, 2018",8:00 PM,Fri,(6) Oklahoma,59,@,(12) West Virginia,56,"Mountaineer Field at Milan Puskar Stadium - Morgantown, West Virginia"
+2018,14,"Nov 23, 2018",4:00 PM,Fri,Oregon,55,@,Oregon State,15,"Reser Stadium - Corvallis, Oregon"
+2018,14,"Nov 23, 2018",11:05 AM,Fri,(11) Texas,24,@,Kansas,17,"Memorial Stadium - Lawrence, Kansas"
+2018,14,"Nov 23, 2018",12:00 PM,Fri,Toledo,51,,Central Michigan,13,"Glass Bowl - Toledo, Ohio"
+2018,14,"Nov 23, 2018",3:30 PM,Fri,Virginia Tech,34,,Virginia,31,"Lane Stadium - Blacksburg, Virginia"
+2018,14,"Nov 23, 2018",8:30 PM,Fri,(16) Washington,28,@,(7) Washington State,15,"Martin Stadium - Pullman, Washington"
 2018,14,"Nov 24, 2018",3:00 PM,Sat,Alabama-Birmingham,,@,Middle Tennessee State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Arizona State,,@,Arizona,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Arizona State,,@,Arizona,,
 2018,14,"Nov 24, 2018",4:00 PM,Sat,Arkansas State,,@,Texas State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Auburn,,@,(1) Alabama,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Auburn,,@,(1) Alabama,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Baylor,,,Texas Tech,,"AT&T Stadium - Arlington, Texas"
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Brigham Young,,@,(18) Utah,,
+2018,14,"Nov 24, 2018",10:00 PM,Sat,Brigham Young,,@,(18) Utah,,
 2018,14,"Nov 24, 2018",6:00 PM,Sat,Charlotte,,@,Florida Atlantic,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Coastal Carolina,,@,South Alabama,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Colorado,,@,California,,
+2018,14,"Nov 24, 2018",7:00 PM,Sat,Colorado,,@,California,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,(13) Florida,,@,Florida State,,
 2018,14,"Nov 24, 2018",2:00 PM,Sat,Georgia Southern,,@,Georgia State,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Georgia Tech,,@,(5) Georgia,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Hawaii,,@,San Diego State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Illinois,,@,(20) Northwestern,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Kansas State,,@,(25) Iowa State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,(17) Kentucky,,@,Louisville,,
+2018,14,"Nov 24, 2018",10:30 PM,Sat,Hawaii,,@,San Diego State,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Illinois,,@,(20) Northwestern,,
+2018,14,"Nov 24, 2018",7:00 PM,Sat,Kansas State,,@,(25) Iowa State,,
+2018,14,"Nov 24, 2018",7:00 PM,Sat,(17) Kentucky,,@,Louisville,,
 2018,14,"Nov 24, 2018",3:00 PM,Sat,Louisiana,,@,Louisiana-Monroe,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,(8) Louisiana State,,@,Texas A&M,,
+2018,14,"Nov 24, 2018",7:30 PM,Sat,(8) Louisiana State,,@,Texas A&M,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Marshall,,@,Florida International,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Maryland,,@,(15) Penn State,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Maryland,,@,(15) Penn State,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,(4) Michigan,,@,(10) Ohio State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Minnesota,,@,Wisconsin,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Minnesota,,@,Wisconsin,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Navy,,@,Tulane,,
 2018,14,"Nov 24, 2018",9:30 PM,Sat,Nevada,,@,Nevada-Las Vegas,,
 2018,14,"Nov 24, 2018",2:00 PM,Sat,New Mexico State,,@,Liberty,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,North Carolina State,,@,North Carolina,,
+2018,14,"Nov 24, 2018",12:20 PM,Sat,North Carolina State,,@,North Carolina,,
 2018,14,"Nov 24, 2018",7:00 PM,Sat,North Texas,,@,Texas-San Antonio,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,(3) Notre Dame,,@,Southern California,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Oklahoma State,,@,Texas Christian,,
+2018,14,"Nov 24, 2018",8:00 PM,Sat,(3) Notre Dame,,@,Southern California,,
+2018,14,"Nov 24, 2018",8:00 PM,Sat,Oklahoma State,,@,Texas Christian,,
 2018,14,"Nov 24, 2018",1:00 PM,Sat,Old Dominion,,@,Rice,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,(24) Pittsburgh,,@,Miami (FL),,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,(24) Pittsburgh,,@,Miami (FL),,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Purdue,,@,Indiana,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Rutgers,,@,Michigan State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,San Jose State,,@,Fresno State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,South Carolina,,@,(2) Clemson,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Southern Methodist,,@,Tulsa,,
+2018,14,"Nov 24, 2018",4:00 PM,Sat,Rutgers,,@,Michigan State,,
+2018,14,"Nov 24, 2018",7:00 PM,Sat,San Jose State,,@,Fresno State,,
+2018,14,"Nov 24, 2018",12:00 PM,Sat,South Alabama,31,,Coastal Carolina,28,
+2018,14,"Nov 24, 2018",7:00 PM,Sat,South Carolina,,@,(2) Clemson,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Southern Methodist,,@,Tulsa,,
 2018,14,"Nov 24, 2018",3:00 PM,Sat,Southern Mississippi,,@,Texas-El Paso,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Stanford,,@,UCLA,,
+2018,14,"Nov 24, 2018",3:00 PM,Sat,Stanford,,@,UCLA,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,(19) Syracuse,,@,Boston College,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Temple,,@,Connecticut,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Tennessee,,@,Vanderbilt,,
-2018,14,"Nov 24, 2018",3:30 PM,Sat,Troy,,@,Appalachian State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,(14) Utah State,,@,(21) Boise State,,
-2018,14,"Nov 24, 2018",12:00 PM,Sat,Wake Forest,,@,Duke,,
+2018,14,"Nov 24, 2018",3:30 PM,Sat,Temple,,@,Connecticut,,
+2018,14,"Nov 24, 2018",4:00 PM,Sat,Tennessee,,@,Vanderbilt,,
+2018,14,"Nov 24, 2018",2:30 PM,Sat,Troy,,@,Appalachian State,,
+2018,14,"Nov 24, 2018",10:15 PM,Sat,(14) Utah State,,@,(21) Boise State,,
+2018,14,"Nov 24, 2018",12:30 PM,Sat,Wake Forest,,@,Duke,,
 2018,14,"Nov 24, 2018",12:00 PM,Sat,Western Kentucky,,@,Louisiana Tech,,
 2018,14,"Nov 24, 2018",2:30 PM,Sat,Wyoming,,@,New Mexico,,
+2018,15,"Dec 1, 2018",12:00 PM,Sat,Akron,,@,South Carolina,,
+2018,15,"Dec 1, 2018",4:00 PM,Sat,(1) Alabama,,,(5) Georgia,,"Mercedes-Benz Stadium - Atlanta, Georgia"
 2018,15,"Dec 1, 2018",12:00 PM,Sat,East Carolina,,@,North Carolina State,,
 2018,15,"Dec 1, 2018",2:00 PM,Sat,Incarnate Word,,@,(25) Iowa State,,
 2018,15,"Dec 1, 2018",2:00 PM,Sat,Norfolk State,,@,Liberty,,
+2018,15,"Dec 1, 2018",3:00 PM,Sat,Stanford,,@,California,,
 2018,16,"Dec 8, 2018",3:00 PM,Sat,(23) Army,,,Navy,,"Lincoln Financial Field - Philadelphia, Pennsylvania"

@@ -1,0 +1,58 @@
+Year,Date,Team,Opp,Prediction,Proba
+2018,2018-11-24 15:00:00,Middle Tennessee State,Alabama-Birmingham,1.0,0.7251828
+2018,2018-11-24 15:30:00,Arizona State,Arizona,1.0,0.559493
+2018,2018-11-24 16:00:00,Arkansas State,Texas State,1.0,0.730319
+2018,2018-11-24 15:30:00,Alabama,Auburn,1.0,0.9245901
+2018,2018-11-24 12:00:00,Baylor,Texas Tech,1.0,0.5508625
+2018,2018-11-24 22:00:00,Utah,Brigham Young,1.0,0.88901335
+2018,2018-11-24 18:00:00,Florida Atlantic,Charlotte,1.0,0.5959685
+2018,2018-11-24 19:00:00,California,Colorado,1.0,0.6822243
+2018,2018-11-24 12:00:00,Florida,Florida State,1.0,0.557144
+2018,2018-11-24 14:00:00,Georgia Southern,Georgia State,1.0,0.79500926
+2018,2018-11-24 12:00:00,Georgia,Georgia Tech,1.0,0.94289947
+2018,2018-11-24 22:30:00,San Diego State,Hawaii,1.0,0.58963704
+2018,2018-11-24 15:30:00,Northwestern,Illinois,1.0,0.8578897
+2018,2018-11-24 19:00:00,Iowa State,Kansas State,1.0,0.66473156
+2018,2018-11-24 19:00:00,Kentucky,Louisville,1.0,0.6323901
+2018,2018-11-24 15:00:00,Louisiana-Monroe,Louisiana,1.0,0.58103067
+2018,2018-11-24 19:30:00,Louisiana State,Texas A&M,1.0,0.57904494
+2018,2018-11-24 12:00:00,Florida International,Marshall,1.0,0.5849109
+2018,2018-11-24 15:30:00,Penn State,Maryland,1.0,0.8397034
+2018,2018-11-24 12:00:00,Ohio State,Michigan,1.0,0.586393
+2018,2018-11-24 15:30:00,Wisconsin,Minnesota,1.0,0.7193088
+2018,2018-11-24 12:00:00,Tulane,Navy,1.0,0.7564244
+2018,2018-11-24 21:30:00,Nevada,Nevada-Las Vegas,1.0,0.7198607
+2018,2018-11-24 14:00:00,New Mexico State,Liberty,1.0,0.56830317
+2018,2018-11-24 14:00:00,Liberty,New Mexico State,1.0,0.53493273
+2018,2018-11-24 12:20:00,North Carolina State,North Carolina,1.0,0.8036785
+2018,2018-11-24 19:00:00,North Texas,Texas-San Antonio,1.0,0.5497954
+2018,2018-11-24 20:00:00,Notre Dame,Southern California,1.0,0.7872282
+2018,2018-11-24 20:00:00,Oklahoma State,Texas Christian,1.0,0.55555946
+2018,2018-11-24 13:00:00,Old Dominion,Rice,1.0,0.6602914
+2018,2018-11-24 15:30:00,Miami (FL),Pittsburgh,1.0,0.7361831
+2018,2018-11-24 12:00:00,Purdue,Indiana,1.0,0.5235841
+2018,2018-11-24 16:00:00,Michigan State,Rutgers,1.0,0.87772375
+2018,2018-11-24 19:00:00,Fresno State,San Jose State,1.0,0.9248631
+2018,2018-11-24 12:00:00,Coastal Carolina,South Alabama,1.0,0.6932333
+2018,2018-11-24 19:00:00,Clemson,South Carolina,1.0,0.9572708
+2018,2018-11-24 15:30:00,Southern Methodist,Tulsa,1.0,0.5150026
+2018,2018-11-24 15:30:00,Tulsa,Southern Methodist,1.0,0.5718739
+2018,2018-11-24 15:00:00,Southern Mississippi,Texas-El Paso,1.0,0.5910778
+2018,2018-11-24 15:00:00,Stanford,UCLA,1.0,0.71821654
+2018,2018-11-24 12:00:00,Syracuse,Boston College,1.0,0.59419984
+2018,2018-11-24 15:30:00,Temple,Connecticut,1.0,0.8455451
+2018,2018-11-24 16:00:00,Vanderbilt,Tennessee,1.0,0.55932367
+2018,2018-11-24 14:30:00,Appalachian State,Troy,1.0,0.5980565
+2018,2018-11-24 22:15:00,Boise State,Utah State,1.0,0.5072331
+2018,2018-11-24 22:15:00,Utah State,Boise State,1.0,0.59374917
+2018,2018-11-24 12:30:00,Duke,Wake Forest,1.0,0.69832027
+2018,2018-11-24 12:00:00,Louisiana Tech,Western Kentucky,1.0,0.8793925
+2018,2018-11-24 14:30:00,Wyoming,New Mexico,1.0,0.60573876
+2018,2018-12-01 12:00:00,South Carolina,Akron,1.0,0.8234134
+2018,2018-12-01 16:00:00,Alabama,Georgia,1.0,0.77731943
+2018,2018-12-01 12:00:00,North Carolina State,East Carolina,1.0,0.8729559
+2018,2018-12-01 14:00:00,Iowa State,Incarnate Word,1.0,0.94971055
+2018,2018-12-01 14:00:00,Liberty,Norfolk State,1.0,0.8609375
+2018,2018-12-01 15:00:00,California,Stanford,1.0,0.5043212
+2018,2018-12-01 15:00:00,Stanford,California,1.0,0.51054287
+2018,2018-12-08 15:00:00,Army,Navy,1.0,0.90506494
