@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Created on Mon Nov 26 13:21:56 2018
 
-This is a temporary script file.
+@author: markvonoven
 """
 
 # import packages
 import urllib3
 import certifi
-import csv
 from bs4 import BeautifulSoup
-import re
 import pandas as pd
 import datetime
 
@@ -24,7 +22,7 @@ history_list = ['2014', '2015', '2016', '2017']
 yrs_list = ['2014', '2015', '2016', '2017', '2018']
 today = datetime.datetime.today()
 G_year = today.year
-history_filepath = './SRinput/current/schedule_history.csv'
+history_filepath = '/Users/markvonoven/Projects/CollegeFootball/SRinput/current/schedule_history.csv'
 
 #define some helper functions
 def monthToNum(shortMonth):
@@ -368,7 +366,6 @@ def get_history():
     Pulls in the existing history of played games and preps the data for modeling
     """
     gametime_mstr = pd.read_csv(history_filepath)
-    gametime_mstr = gametime_mstr.drop('Unnamed: 0', axis=1)
     cols = ['Year', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     gametime_mstr = gametime_mstr[cols]
     gametime_mstr.set_index('Year', inplace=True)

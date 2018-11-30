@@ -12,7 +12,11 @@ import pandas as pd
 first_year = 2014
 
 #dataframes
-conference_mstr = pd.read_csv('./input/conference_master.csv')
+conference_mstr = pd.read_csv('/Users/markvonoven/Projects/CollegeFootball/input/conference_master.csv')
+GLstats = pd.read_csv('/Users/markvonoven/Projects/CollegeFootball/SRoutput/past_games_w_GLstats.csv')
+GLstats.set_index('Season', inplace=True)
+GLstats['Date'] = pd.to_datetime(GLstats['Date'])
+GLstats = GLstats.sort_values(by=['Date'])
 
 def get_season_str_yr(gamedate):
     """ Takes the date of a game and 
@@ -123,6 +127,48 @@ def in_conf_game(team1, team2, yr):
     else:
         return 0
     
+def offensive_strategy(team, date):
+    # Calulating offensive strategy going into each played game...for future games it will give IndexError
+    # because GLstats doesn't have future game stats, so instead it needs to find the last game we have in GLstats
+    try:  # simple stat pull for past games
+        Pass_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Off_Pass_att']
+        Rush_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Off_Rush_att']
+    except IndexError:  # this is for future games, which uses the last known game stats
+        try:
+            laststatdate = max(GLstats[GLstats['Team'] == team]['Date'])
+            Pass_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Off_Pass_att']
+            Rush_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Off_Rush_att']
+        except ValueError:  # this future game team has no past stats, return balanced offensive strategy
+            return 1
+    if (Pass_att == 0):
+        return 0
+    elif (Rush_att == 0):
+        return 1
+    else:
+        off_strat = (Pass_att / Rush_att)   
+        return round(off_strat, 3)
+    
+def defensive_strength(team, date):
+    # Calulating defensive strength going into each played game...for future games it will give IndexError
+    # because GLstats doesn't have future game stats, so instead it needs to find the last game we have in GLstats
+    try:  # simple stat pull for past games
+        Pass_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Def_Pass_yds']
+        Rush_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Def_Rush_yds']
+    except IndexError:  # this is for future games, which uses the last known game stats
+        try:
+            laststatdate = max(GLstats[GLstats['Team'] == team]['Date'])
+            Pass_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Def_Pass_yds']
+            Rush_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Def_Pass_yds']
+        except ValueError:  # this future game team has no past stats, return balanced defensive strength
+            return 1
+    if (Pass_yds == 0):
+        return 0
+    elif (Rush_yds == 0):
+        return 1
+    else:
+        def_strength = (Pass_yds / Rush_yds)
+        return round(def_strength, 3)
+    
 def apply_features(orig_df):
     """
     Intended for use with dataframes containing past game history
@@ -139,6 +185,14 @@ def apply_features(orig_df):
     print('Added Opp_SRTD')
     new_df['Opp_CRTD'] = new_df.apply(lambda x: conf_record_to_date(new_df, x['Opp'], x['Date']), axis=1)
     print('Added Opp_CRTD')
+    new_df['Team_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Team'], x['Date']), axis=1)
+    print('Added Team_OffStrat')
+    new_df['Opp_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Opp'], x['Date']), axis=1)
+    print('Added Opp_OffStrat')
+    new_df['Team_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Team'], x['Date']), axis=1)
+    print('Added Team_DefStren')
+    new_df['Opp_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Opp'], x['Date']), axis=1)
+    print('Added Opp_DefStren')
     return new_df
 
 def apply_future_features(future_df, full_history):
@@ -158,5 +212,13 @@ def apply_future_features(future_df, full_history):
     print('Added Opp_SRTD')
     new_df['Opp_CRTD'] = new_df.apply(lambda x: conf_record_to_date(full_history, x['Opp'], x['Date']), axis=1)
     print('Added Opp_CRTD')
+    new_df['Team_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Team'], x['Date']), axis=1)
+    print('Added Team_OffStrat')
+    new_df['Opp_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Opp'], x['Date']), axis=1)
+    print('Added Opp_OffStrat')
+    new_df['Team_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Team'], x['Date']), axis=1)
+    print('Added Team_DefStren')
+    new_df['Opp_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Opp'], x['Date']), axis=1)
+    print('Added Opp_DefStren')
 
     return new_df

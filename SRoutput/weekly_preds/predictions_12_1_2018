@@ -1,0 +1,18 @@
+,Date,Team,Opp,XG,Keras,Keras_proba
+0,2018-11-30 19:00:00,Buffalo,Northern Illinois,1,1.0,0.71228325
+1,2018-11-30 20:00:00,Utah,Washington,0,0.0,0.4794917
+2,2018-12-01 12:00:00,Akron,South Carolina,0,0.0,0.1993415
+3,2018-12-01 16:00:00,Alabama,Georgia,1,1.0,0.7802188
+4,2018-12-01 13:30:00,Alabama-Birmingham,Middle Tennessee State,0,0.0,0.2497962
+5,2018-12-01 20:00:00,Clemson,Pittsburgh,1,1.0,0.9578433
+6,2018-12-01 12:00:00,Drake,Iowa State,0,0.0,0.039457113
+7,2018-12-01 12:00:00,East Carolina,North Carolina State,0,0.0,0.11817031
+8,2018-12-01 19:45:00,Fresno State,Boise State,0,0.0,0.33235356
+9,2018-12-01 12:00:00,Louisiana,Appalachian State,0,0.0,0.29195485
+10,2018-12-01 12:00:00,Marshall,Virginia Tech,0,0.0,0.40362564
+11,2018-12-01 15:30:00,Memphis,Central Florida,0,0.0,0.07458414
+12,2018-12-01 14:00:00,Norfolk State,Liberty,0,0.0,0.06669192
+13,2018-12-01 20:00:00,Northwestern,Ohio State,0,0.0,0.31382605
+14,2018-12-01 12:00:00,Oklahoma,Texas,1,1.0,0.7693518
+15,2018-12-01 15:00:00,Stanford,California,0,0.0,0.48870143
+16,2018-12-08 15:00:00,Army,Navy,1,1.0,0.90332544
