@@ -60,11 +60,46 @@ def winner_home(string):
     Added N for use with the Gamelogs
     """
     if string == '@':
-        return 0
+        return 'Away'
     elif string == 'N':
-        return 0
+        return 'Neutral'
     else:
+        return 'Home'
+    
+def bowl_games(date):
+    """
+    Given a date, returns 1 for bowl game and 0 for non-bowl game
+    Bowl games are defined as any game between 12/14 and 1/31 of any year
+    """
+    month = date.month
+    day = date.day
+    if (month == 12) and (day > 14):
         return 1
+    elif month == 1:
+        return 1
+    else:
+        return 0
+    
+def game_location(date, flag):
+    """
+    Produces final location for games in schedule_mstr
+    """
+    if bowl_games(date):
+        return 'Neutral'
+    else:
+        return flag
+    
+def game_location_flipper(date, flag):
+    """
+    Produces final location for games in doppelganger (which requires flipping original location flag)
+    """
+    if bowl_games(date):
+        return 'Neutral'
+    elif flag == 'Home':
+        return 'Away'
+    else:
+        return 'Home'
+    
     
 def fill_time(timestamp):
     """
@@ -127,6 +162,28 @@ def flipper(flag):
     if flag == 1:
         return 0
     
+def home_flipper(flag):
+    """
+    Flips Home/Away and vice versa
+    """
+    if flag == 'Home':
+        return 'Away'
+    elif flag == 'Away':
+        return 'Home'
+    else:
+        return 'Neutral'
+    
+def gamecode(date, team, opp):
+    """
+    Create a unique gamecode identifier based on season, date and teams playing
+    """
+    yr = str(date.year)
+    mon = str(date.month)
+    day = str(date.day)
+    tm = team[0:3]
+    op = opp[0:3]
+    return (str(yr) + mon + day + tm + op)
+    
 def clean_past_schedule(schedule_mstr):
     """
     Given a schedule of games from Sports-Reference.com, this function will employ 
@@ -153,6 +210,9 @@ def clean_past_schedule(schedule_mstr):
     # Create binary value for home games and drop @ symbol column
     schedule_mstr['Game_home'] = schedule_mstr.apply(lambda x: winner_home(x['At_sym']), axis=1)
     schedule_mstr = schedule_mstr.drop('At_sym', axis=1)
+    # Create binary value for bowl games and fix home indicator
+    #schedule_mstr['Game_bowl'] = schedule_mstr.apply(lambda x: bowl_games(x['Date']), axis=1)
+    schedule_mstr['Game_home'] = schedule_mstr.apply(lambda x: game_location(x['Date'], x['Game_home']), axis=1)
     # Clean up team names
     schedule_mstr['Team'] = schedule_mstr.apply(lambda x: drop_rank(x['Team']), axis=1)
     schedule_mstr['Opp'] = schedule_mstr.apply(lambda x: drop_rank(x['Opp']), axis=1)
@@ -164,24 +224,25 @@ def clean_past_schedule(schedule_mstr):
     
     dopplegngr = schedule_mstr.copy()
     # rename columns to perform the 'swap'
-    dopplegngr.columns = ['Year', 'Weeknum', 'Date', 'Day', 'Opp', 'Opp_Pts', 'Team',
+    dopplegngr.columns = ['Season', 'Weeknum', 'Date', 'Day', 'Opp', 'Opp_Pts', 'Team',
                           'Team_Pts', 'Notes', 'Opp_rank', 'Team_rank', 'Game_home', 'Won']
     # rearrange the columns so the axis matches the original
-    cols = ['Year', 'Weeknum', 'Date', 'Day', 'Team', 'Team_Pts', 
+    cols = ['Season', 'Weeknum', 'Date', 'Day', 'Team', 'Team_Pts', 
                             'Opp', 'Opp_Pts', 'Notes', 'Team_rank', 'Opp_rank', 'Game_home', 'Won']
     dopplegngr = dopplegngr[cols]
-    dopplegngr['Game_home'] = dopplegngr.apply(lambda x: flipper(x['Game_home']), axis=1)
+    dopplegngr['Game_home'] = dopplegngr.apply(lambda x: game_location_flipper(x['Date'], x['Game_home']), axis=1)
     dopplegngr['Won'] = dopplegngr.apply(lambda x: flipper(x['Won']), axis=1)
 
     schedule_mstr = pd.concat([schedule_mstr, dopplegngr])
+    # Create a unique gamecode column for each game
+    schedule_mstr['Gamecode'] = schedule_mstr.apply(lambda x: gamecode(x['Date'], x['Team'], x['Opp']), axis=1)
     
-    cols = ['Year', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    cols = ['Season', 'Gamecode', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     schedule_mstr = schedule_mstr[cols]
-    schedule_mstr.set_index('Year', inplace=True)
-    schedule_mstr['Season'] = schedule_mstr.index
-    cols1 = ['Season', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    schedule_mstr.set_index(['Season', 'Gamecode'], inplace=True)
+    cols1 = ['Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     schedule_mstr = schedule_mstr[cols1]
-    schedule_mstr = schedule_mstr.sort_index()
+    schedule_mstr = schedule_mstr.sort_values(by=['Date'])
     
     return schedule_mstr
 
@@ -209,18 +270,23 @@ def clean_future_schedule(schedule_mstr):
     # Create binary value for home games and drop @ symbol column
     future_mstr['Game_home'] = future_mstr.apply(lambda x: winner_home(x['At_sym']), axis=1)
     future_mstr = future_mstr.drop('At_sym', axis=1)
+    # Create binary value for bowl games and fix home indicator
+    #future_mstr['Game_bowl'] = future_mstr.apply(lambda x: bowl_games(x['Date']), axis=1)
+    future_mstr['Game_home'] = future_mstr.apply(lambda x: game_location(x['Date'], x['Game_home']), axis=1)
     # Clean up team names
     future_mstr['Team'] = future_mstr.apply(lambda x: drop_rank(x['Team']), axis=1)
     future_mstr['Opp'] = future_mstr.apply(lambda x: drop_rank(x['Opp']), axis=1)
+    # Create a unique gamecode column for each game
+    future_mstr['Gamecode'] = future_mstr.apply(lambda x: gamecode(x['Date'], x['Team'], x['Opp']), axis=1)
     # Add the won column with TBD just for concatenation purposes
     future_mstr['Won'] = 'TBD'
     
-    cols = ['Year', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    cols = ['Season', 'Gamecode', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     future_mstr = future_mstr[cols]
-    future_mstr.set_index('Year', inplace=True)
-    future_mstr['Season'] = future_mstr.index
-    cols1 = ['Season', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    future_mstr.set_index(['Season', 'Gamecode'], inplace=True)
+    cols1 = ['Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     future_mstr = future_mstr[cols1]
+    future_mstr = future_mstr.sort_values(by=['Date'])
     
     return future_mstr
     
@@ -260,7 +326,7 @@ def get_season_played_games():
             pass
     print("Finished scraping " + str(G_year) + " schedule with " + str(cnt) + " rows")
     
-    schedule_mstr = pd.DataFrame(games, columns=['Year', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
+    schedule_mstr = pd.DataFrame(games, columns=['Season', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
                                                  'Team_Pts', 'At_sym', 'Opp', 'Opp_Pts', 'Notes'])
     
     schedule_mstr = clean_past_schedule(schedule_mstr)
@@ -307,7 +373,7 @@ def get_season_future_games():
             pass
     print("Finished scraping " + str(G_year) + " schedule with " + str(cnt) + " rows")
     
-    schedule_mstr = pd.DataFrame(games, columns=['Year', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
+    schedule_mstr = pd.DataFrame(games, columns=['Season', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
                                                  'Team_Pts', 'At_sym', 'Opp', 'Opp_Pts', 'Notes'])
     
     future_mstr = clean_future_schedule(schedule_mstr)
@@ -353,7 +419,7 @@ def create_history():
                 pass
         print("Finished scraping " + str(year) + " schedule with " + str(cnt) + " rows")
         
-    schedule_mstr = pd.DataFrame(games, columns=['Year', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
+    schedule_mstr = pd.DataFrame(games, columns=['Season', 'Weeknum', 'Date', 'Time', 'Day', 'Team',
                                                  'Team_Pts', 'At_sym', 'Opp', 'Opp_Pts', 'Notes'])
         
     schedule_mstr = clean_past_schedule(schedule_mstr)
@@ -366,12 +432,15 @@ def get_history():
     Pulls in the existing history of played games and preps the data for modeling
     """
     gametime_mstr = pd.read_csv(history_filepath)
-    cols = ['Year', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    cols = ['Season', 'Gamecode', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     gametime_mstr = gametime_mstr[cols]
-    gametime_mstr.set_index('Year', inplace=True)
-    gametime_mstr['Season'] = gametime_mstr.index
-    cols1 = ['Season', 'Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
+    gametime_mstr.set_index(['Season', 'Gamecode'], inplace=True)
+    cols1 = ['Date', 'Team', 'Opp', 'Won', 'Game_home', 'Team_rank', 'Opp_rank']
     gametime_mstr = gametime_mstr[cols1]
     gametime_mstr['Date'] = pd.to_datetime(gametime_mstr['Date'])
+    gametime_mstr = gametime_mstr.sort_values(by=['Date'])
     return gametime_mstr
+
+    
+    
     

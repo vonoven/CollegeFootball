@@ -13,10 +13,6 @@ first_year = 2014
 
 #dataframes
 conference_mstr = pd.read_csv('/Users/markvonoven/Projects/CollegeFootball/input/conference_master.csv')
-GLstats = pd.read_csv('/Users/markvonoven/Projects/CollegeFootball/SRoutput/past_games_w_GLstats.csv')
-GLstats.set_index('Season', inplace=True)
-GLstats['Date'] = pd.to_datetime(GLstats['Date'])
-GLstats = GLstats.sort_values(by=['Date'])
 
 def get_season_str_yr(gamedate):
     """ Takes the date of a game and 
@@ -121,53 +117,109 @@ def get_conf(team, yr):
     except IndexError:
         return 'missing'
 
-def in_conf_game(team1, team2, yr):
-    if get_conf(team1, yr) == get_conf(team2, yr):
+def in_conf_game(team1, team2, date):
+    yr = get_season_yr(date)
+    c1 = get_conf(team1, yr)
+    c2 = get_conf(team2, yr)
+    if c1 == 'missing':  #team one is not in a conference
+        return 0
+    elif c1 == c2:
         return 1
     else:
         return 0
     
-def offensive_strategy(team, date):
-    # Calulating offensive strategy going into each played game...for future games it will give IndexError
-    # because GLstats doesn't have future game stats, so instead it needs to find the last game we have in GLstats
-    try:  # simple stat pull for past games
-        Pass_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Off_Pass_att']
-        Rush_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Off_Rush_att']
-    except IndexError:  # this is for future games, which uses the last known game stats
-        try:
-            laststatdate = max(GLstats[GLstats['Team'] == team]['Date'])
-            Pass_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Off_Pass_att']
-            Rush_att = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Off_Rush_att']
-        except ValueError:  # this future game team has no past stats, return balanced offensive strategy
-            return 1
-    if (Pass_att == 0):
-        return 0
-    elif (Rush_att == 0):
-        return 1
+def season_opps_to_date(df, team, date):
+    """Given a team and date, this function returns a list of opponents
+    up to, but not including, that date.  If this is the first game of the season
+    it returns the list from last season"""
+    # account for bowl games that occur in next calendar year
+    str_year = get_season_yr(date)
+    # locate the full season for this team and calculate wins
+    team_season = df[df['Team'] == team].loc[str_year]
+    if isinstance(team_season, pd.core.series.Series):
+        games = 0
     else:
-        off_strat = (Pass_att / Rush_att)   
-        return round(off_strat, 3)
-    
-def defensive_strength(team, date):
-    # Calulating defensive strength going into each played game...for future games it will give IndexError
-    # because GLstats doesn't have future game stats, so instead it needs to find the last game we have in GLstats
-    try:  # simple stat pull for past games
-        Pass_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Def_Pass_yds']
-        Rush_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == date].iloc[0]['Team_Def_Rush_yds']
-    except IndexError:  # this is for future games, which uses the last known game stats
+        games_to_date = team_season[team_season['Date'] < date]
+        games = games_to_date.shape[0]
+    # account for first game of the season - use last year unless we don't have it
+    if ((games == 0) & (str_year != first_year)):
+        str_year = date.year - 1
+        # Handle errors when there is no last season
         try:
-            laststatdate = max(GLstats[GLstats['Team'] == team]['Date'])
-            Pass_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Def_Pass_yds']
-            Rush_yds = GLstats[GLstats['Team'] == team][GLstats[GLstats['Team'] == team]['Date'] == laststatdate].iloc[0]['Team_Def_Pass_yds']
-        except ValueError:  # this future game team has no past stats, return balanced defensive strength
-            return 1
-    if (Pass_yds == 0):
-        return 0
-    elif (Rush_yds == 0):
-        return 1
+            last_season = df[df['Team'] == team].loc[str_year]
+            games = last_season.shape[0]
+            # don't allow to divide by zero
+            if games > 0:
+                opps = last_season['Opp']
+            else:
+                opps = []
+        except KeyError:
+            opps = []
+    elif ((games == 0) & (str_year == first_year)):
+        opps = []
     else:
-        def_strength = (Pass_yds / Rush_yds)
-        return round(def_strength, 3)
+        opps = games_to_date['Opp']
+    return opps
+
+def sos_record_to_date(df, team, date):
+    """Given a team and date, this function returns the wins and games of opponents records
+    up to, but not including, that date.  If this is the first game of the season
+    it returns the numbers from last season"""
+    # account for bowl games that occur in next calendar year
+    str_year = get_season_yr(date)
+    # locate the full season for this team and calculate wins
+    team_season = df[df['Team'] == team].loc[str_year]
+    if isinstance(team_season, pd.core.series.Series):
+        games = 0
+    else:
+        games_to_date = team_season[team_season['Date'] < date]
+        games = games_to_date.shape[0]
+    # account for first game of the season - use last year unless we don't have it
+    if ((games == 0) & (str_year != first_year)):
+        str_year = date.year - 1
+        # Handle errors when there is no last season
+        try:
+            last_season = df[df['Team'] == team].loc[str_year]
+            games = last_season.shape[0]
+            wins = last_season['Won'].sum()
+            # don't allow to divide by zero
+            if games > 0:
+                win_game_tuple = (wins, games)
+            else:
+                win_game_tuple = (0, 0)
+        except KeyError:
+            win_game_tuple = (0, 0)
+    elif ((games == 0) & (str_year == first_year)):
+        return (0, 0)
+    else:
+        wins = games_to_date['Won'].sum()
+        win_game_tuple = (wins, games)
+    return win_game_tuple
+
+def strength_of_schedule(df, team, date):
+    opp_wins = 0
+    opp_games = 0
+    oppopp_wins = 0
+    oppopp_games = 0
+    opp_list = season_opps_to_date(df, team, date)
+    if isinstance(opp_list, pd.core.series.Series):
+        for opp in opp_list:  # find the opponents' records
+            my_tuple = sos_record_to_date(df, opp, date)
+            opp_wins += my_tuple[0]
+            opp_games += my_tuple[1]
+            oppopp_list = season_opps_to_date(df, opp, date)
+            for oppopp in oppopp_list: # find the opponents' opponents' records
+                oppopp_tuple = sos_record_to_date(df, oppopp, date)
+                oppopp_wins += oppopp_tuple[0]
+                oppopp_games += oppopp_tuple[1]
+        if (opp_games > 0) & (oppopp_games > 0):
+            return round(((2*(opp_wins/opp_games) + (oppopp_wins/oppopp_games))/3), 3)
+        elif opp_games > 0:
+            return round((2*(opp_wins/opp_games)), 3)
+        else:
+            return 0
+    else:
+        return 0
     
 def apply_features(orig_df):
     """
@@ -175,7 +227,9 @@ def apply_features(orig_df):
     This function adds engineered features to the played games for model training
     """
     new_df = orig_df.copy()
-    new_df['Game_conf'] = new_df.apply(lambda x: in_conf_game(x['Team'], x['Opp'], x['Season']), axis=1)
+    #new_df['Team_SOS'] = new_df.apply(lambda x: strength_of_schedule(new_df, x['Team'], x['Date']), axis=1)
+    #print('Added Team_SOS')
+    new_df['Game_conf'] = new_df.apply(lambda x: in_conf_game(x['Team'], x['Opp'], x['Date']), axis=1)
     print('Added Game_conf')
     new_df['Team_SRTD'] = new_df.apply(lambda x: season_record_to_date(new_df, x['Team'], x['Date']), axis=1)
     print('Added Team_SRTD')
@@ -185,14 +239,6 @@ def apply_features(orig_df):
     print('Added Opp_SRTD')
     new_df['Opp_CRTD'] = new_df.apply(lambda x: conf_record_to_date(new_df, x['Opp'], x['Date']), axis=1)
     print('Added Opp_CRTD')
-    new_df['Team_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Team'], x['Date']), axis=1)
-    print('Added Team_OffStrat')
-    new_df['Opp_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Opp'], x['Date']), axis=1)
-    print('Added Opp_OffStrat')
-    new_df['Team_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Team'], x['Date']), axis=1)
-    print('Added Team_DefStren')
-    new_df['Opp_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Opp'], x['Date']), axis=1)
-    print('Added Opp_DefStren')
     return new_df
 
 def apply_future_features(future_df, full_history):
@@ -202,8 +248,10 @@ def apply_future_features(future_df, full_history):
     NOTE:  A full history dataframe (with features) is required to make this work
     """
     new_df = future_df.copy()
-    new_df['Game_conf'] = new_df.apply(lambda x: in_conf_game(x['Team'], x['Opp'], x['Season']), axis=1)
+    new_df['Game_conf'] = new_df.apply(lambda x: in_conf_game(x['Team'], x['Opp'], x['Date']), axis=1)
     print('Added Game_conf')
+    #new_df['Team_SOS'] = new_df.apply(lambda x: strength_of_schedule(full_history, x['Team'], x['Date']), axis=1)
+    #print('Added Team_SOS')
     new_df['Team_SRTD'] = new_df.apply(lambda x: season_record_to_date(full_history, x['Team'], x['Date']), axis=1)
     print('Added Team_SRTD')
     new_df['Team_CRTD'] = new_df.apply(lambda x: conf_record_to_date(full_history, x['Team'], x['Date']), axis=1)
@@ -212,13 +260,4 @@ def apply_future_features(future_df, full_history):
     print('Added Opp_SRTD')
     new_df['Opp_CRTD'] = new_df.apply(lambda x: conf_record_to_date(full_history, x['Opp'], x['Date']), axis=1)
     print('Added Opp_CRTD')
-    new_df['Team_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Team'], x['Date']), axis=1)
-    print('Added Team_OffStrat')
-    new_df['Opp_OffStrat'] = new_df.apply(lambda x: offensive_strategy(x['Opp'], x['Date']), axis=1)
-    print('Added Opp_OffStrat')
-    new_df['Team_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Team'], x['Date']), axis=1)
-    print('Added Team_DefStren')
-    new_df['Opp_DefStren'] = new_df.apply(lambda x: defensive_strength(x['Opp'], x['Date']), axis=1)
-    print('Added Opp_DefStren')
-
     return new_df

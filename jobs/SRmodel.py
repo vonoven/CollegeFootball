@@ -66,7 +66,7 @@ def predict_XGB():
     XG_preds = xgb.predict(X_new)
     future_mstr['Predictions'] = XG_preds
     #return the relevant prediction information
-    cols = ['Date', 'Team', 'Opp', 'Predictions']
+    cols = ['Gamecode', 'Date', 'Team', 'Opp', 'Predictions']
     prediction_mstr_all = future_mstr[cols]
     
     return prediction_mstr_all
@@ -143,7 +143,7 @@ def predict_Keras():
     prediction_mstr_w_preds['Prediction'] = y_new
     prediction_mstr_w_preds['Proba'] = y_new_proba
     # keep only the columns you want to see
-    cols = ['Date', 'Team', 'Opp', 'Prediction', 'Proba']
+    cols = ['Gamecode', 'Date', 'Team', 'Opp', 'Prediction', 'Proba']
     prediction_final = prediction_mstr_w_preds[cols]
     
     return prediction_final
